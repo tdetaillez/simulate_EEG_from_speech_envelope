@@ -22,7 +22,7 @@ import sys
 
 
 
-def createReversedModel(num_hidden_layers,overWrite=0):
+def createModel(num_hidden_layers,overWrite=0):
     if overWrite==0:
         streamLength=trainPredWin-tempContext+1
     else:
@@ -153,7 +153,7 @@ for part in range(numParticipants):
     testDataI[part,:,:]=eegData[part,leaveBlock*2+1,:,:]
     testDataO[part,:,:]=targetAudio[part,leaveBlock*2+1,:-tempContext+1,:]
 
-revModel=createReversedModel(num_hidden_layers)
+revModel=createModel(num_hidden_layers)
 tempModelName=workingDir+'../model/RevSingle_part_'+str(rep)+'_'+'att_'+str(leaveBlock)+'block_'+str(num_hidden_layers)+'nonlin_'+'fs'+str(fs)+'.hdf5'
 
 
@@ -207,7 +207,7 @@ for win in range(len(analysisWindows)):
 '''Predict impulse response'''
 predictLength=tempContext*8+1
 toPredictClick=np.zeros((2,predictLength,numSides),dtype=np.float32)
-revModel=createReversedModel(num_hidden_layers,1)
+revModel=createModel(num_hidden_layers,1)
 revModel.load_weights(tempModelName)
 
 toPredictClick=np.zeros((4,predictLength,1,numSides))    
