@@ -1,4 +1,4 @@
-# simulate_EEG_from_speech_envelope
+# Simulate EEG from speech envelope with deep neural networks
 
 
 This repository is only for publishing the code used in my recent paper (still pending). 
